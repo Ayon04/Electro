@@ -59,10 +59,9 @@
           <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
         </a>
       </div>
-      <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="/forget-password">I forgot my password</a>
       </p>
       <p class="mb-0">
         <a href="/signup" class="text-center">Register a new membership</a>

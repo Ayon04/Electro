@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Registration Page (v2)</title>
 
-  
+
   {{-- @include("fronted.includes.header-script") --}}
   @include("backend.includes.header-script")
 
@@ -15,47 +15,75 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="/signup" class="h1"><b>Signup</b></a>
+      <a href="/signup" class="h1">Signup</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership on <b>Electro</b></p>
+      <p class="login-box-msg">Register a new membership on Electro </p>
 
-      <form action="../../index.html" method="post">
+      @if(session()->has('added'))
+                <div class="alert alert-success">
+                    {{ session()->get('added') }}
+                </div>
+      @endif
+
+      <form action="{{route('admin-signup')}}" enctype="multipart/form-data" method="POST">
+
+      @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name">
+          <input name="fullname" type="text" class="form-control" placeholder="Full name" value="{{old('fullname')}}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
+
+
+
         </div>
+
+        @error('fullname')
+            <div class="text-danger mt-1">{{ $message }}</div>
+            @enderror
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+
         </div>
+        @error('email')
+            <div class="text-danger mt-1">{{ $message }}</div>
+        @enderror
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input name="password" type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        @error('password')
+         <div class="text-danger mt-1">{{ $message }}</div>
+        @enderror
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input name="password_confirmation" type="password" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+
         </div>
+        @error('re-password')
+         <div class="text-danger mt-1">{{ $message }}</div>
+      @enderror
+
+
         <div class="row">
           <div class="col-8">
-           
+
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -73,7 +101,9 @@
           <i class="fab fa-google-plus mr-2"></i>
           Sign up using Google+
         </a>
+
       </div>
+
 
       <a href="/signin" class="text-center">I already have a membership</a>
     </div>
