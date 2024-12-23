@@ -43,7 +43,7 @@
 
         @error('fullname')
             <div class="text-danger mt-1">{{ $message }}</div>
-            @enderror
+        @enderror
         <div class="input-group mb-3">
           <input name="email" type="email" class="form-control" placeholder="Email" value="{{old('email')}}">
           <div class="input-group-append">

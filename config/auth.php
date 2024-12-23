@@ -3,9 +3,9 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Authentication Defaults
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | This option controls the default authentication "guard" and password
     | reset options for your application. You may change these defaults
@@ -14,14 +14,14 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'admin',  // Change 'web' to 'admin' guard
+        'passwords' => 'admins',  // Use 'admins' for password reset configuration
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Authentication Guards
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | Next, you may define every authentication guard for your application.
     | Of course, a great default configuration has been defined for you
@@ -36,16 +36,23 @@ return [
     */
 
     'guards' => [
+        // Admin guard
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',  // Specify 'admins' provider here
+        ],
+
+        // You can keep the default 'web' guard for other user authentication
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users',  // Default provider for normal users
         ],
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | User Providers
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
     | users are actually retrieved out of your database or other storage
@@ -60,21 +67,23 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        // Admin provider
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,  // Make sure this points to your Admin model
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        // Default user provider (optional)
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,  // Your User model
+        ],
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Resetting Passwords
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | You may specify multiple password reset configurations if you have more
     | than one user table or model in the application and you want to have
@@ -91,7 +100,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
+        'admins' => [  // Use 'admins' for the admin password reset
+            'provider' => 'admins',  // Reference the 'admins' provider
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'users' => [  // Password reset configuration for regular users (optional)
             'provider' => 'users',
             'table' => 'password_reset_tokens',
             'expire' => 60,
@@ -100,9 +116,9 @@ return [
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Password Confirmation Timeout
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | Here you may define the amount of seconds before a password confirmation
     | times out and the user is prompted to re-enter their password via the

@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Http\Requests\AdminStoreRequest;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminSignupRequest;
 use App\Services\Models\AdminService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+
+class AdminSignupController extends Controller
 {
 
-    public function store(
+    public function signup(
 
-        AdminStoreRequest $adminStoreRequest,
+        AdminSignupRequest $adminStoreRequest,
         AdminService $adminService
     )
     {
 
         try {
-            //dd();
+            //dd();c
             $userData = $adminStoreRequest->validated();
-            $user = $adminService->store($userData);
+           
+            $user = $adminService->signup($userData);
             return redirect()->back()->with('added', "Admin Signup Succeed");
         } catch (\Throwable $e) {
 

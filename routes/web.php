@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Admin\AdminSigninController;
+use App\Http\Controllers\Admin\AdminSignupController;
+
 use Illuminate\Support\Facades\Route;
 use App\Services\AdminService;
 Route::get('/signin', function () {
@@ -24,7 +28,7 @@ Route::get('/', function () {
 
 Route::get('/admin-dashboard', function () {
     return view('backend.dashboard.index');
-});
+})->name('admin-dashboard');
 
 
 Route::get('/admin-profile', function () {
@@ -47,7 +51,8 @@ Route::get('/add-products', function () {
 });
 
 
-Route::post('/sign_up', [AdminController::class, 'store'])->name('admin-signup');
+Route::post('/sign_up', action: [AdminSignupController::class, 'signup'])->name('admin-signup');
+Route::post('/sign_in', action: [AdminSigninController::class, 'signin'])->name('admin-signin');
 
 
 
