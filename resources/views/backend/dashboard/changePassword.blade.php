@@ -4,7 +4,7 @@
       <div class="card p-4 shadow-sm">
 
       <div class="card-header text-center">
-          <a href="/signup" class="h1">Change Password</a>
+          <a  class="h1">Change Password</a>
         </div>
         <div class="card-body text-center">
 

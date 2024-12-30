@@ -19,10 +19,12 @@
     <div class="col-md-5">
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
-          <a href="/signup" class="h1">Your Profile</a>
+          <a  class="h1">Your Profile</a>
         </div>
         <div class="card-body">
-          <form action="#" method="post">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {{csrf_field()}}
+            @method('PUT')
             <div class="text-center">
               <div class="rounded-circle overflow-hidden border border-primary d-flex align-items-center justify-content-center"
                    style="width: 150px; height: 150px; margin: auto;">
@@ -36,8 +38,8 @@
               </div>
             </div>
             <div class="mt-3"></div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Full name">
+            <div class="input-group mb-3"> 
+              <input type="text" class="form-control" placeholder="Full name" value="">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
@@ -45,7 +47,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" class="form-control" placeholder="Email" value="">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>

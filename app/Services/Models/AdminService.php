@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminService{
 
-public function signup(array $payloads)
+public function create(array $payloads)
 {
     return Admin::query()->create($payloads);
 }

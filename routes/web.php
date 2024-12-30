@@ -1,39 +1,32 @@
 <?php
 
-use App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Admin\AdminSigninController;
-use App\Http\Controllers\Admin\AdminSignupController;
-
+use App\Http\Controllers\Admin\AdminProfileController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Services\AdminService;
-Route::get('/signin', function () {
-    return view('frontend.Signin');
+
+Route::get('/login', function () {
+    return view('auth.login');
 });
 
-
-Route::get('/signup', function () {
-    return view('frontend.Signup');
-});
-
-Route::get('/forget-password', function () {
-    return view('frontend.FogetPassword');
-});
-
+// Route::get('/', action: [HomeController::class, 'index']);
 
 
 Route::get('/', function () {
     return view('frontend.Home.home');
 });
 
-Route::get('/admin-dashboard', function () {
-    return view('backend.dashboard.index');
-})->name('admin-dashboard');
 
-
-Route::get('/admin-profile', function () {
-    return view('backend.dashboard.profile');
+Route::get('/register', function () {
+    return view('auth.register');
 });
+
+Route::get('/forget-password', function () {
+    return view('auth.passwords.reset');
+});
+
 
 
 Route::get('/all-products', function () {
@@ -51,10 +44,29 @@ Route::get('/add-products', function () {
 });
 
 
-Route::post('/sign_up', action: [AdminSignupController::class, 'signup'])->name('admin-signup');
-Route::post('/sign_in', action: [AdminSigninController::class, 'signin'])->name('admin-signin');
+Route::post('/registers', action: [RegisterController::class, 'create'])->name('registers');
+Route::post('/login', action: [LoginController::class, 'login'])->name('login');
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin-dashboard');
 
 
+// Route::get('/admin-dashboard', function () {
+//     return view('backend.dashboard.index');
+// })->name('admin-dashboard');
+// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
+
+
+Route::get('/admin-profile', [App\Http\Controllers\Admin\AdminProfileController::class, 'ViewProfile'])->middleware('auth');
+
+
+// Route::get('/admin-profile', function () {
+//     return view('backend.dashboard.profile');
+// });
 
 

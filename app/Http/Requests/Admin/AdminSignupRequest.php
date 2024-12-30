@@ -22,7 +22,7 @@ class AdminSignupRequest extends FormRequest
 
             'fullname'              => 'required|string|min:3|regex:/^[\pL\s]+$/u|max:30',
             'email'                 => 'required|email|unique:admins,email',
-            'password'              => 'required|confirmed|alpha_num|min:6|max:15',
+            'password'              => 'required|confirmed|alpha_num|min:6|max:30',
             'password_confirmation' => 'required'
 
         ];

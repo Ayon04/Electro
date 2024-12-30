@@ -14,7 +14,7 @@
           <img src="{{ asset('adminAssets') }}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Logged in User </a>
+          <a href="/admin-profile" class="d-block">user</a>
         </div>
       </div>
 

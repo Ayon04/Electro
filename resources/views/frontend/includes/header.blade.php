@@ -4,8 +4,8 @@
     <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 </ul>
 <ul class="header-links pull-right">
-    <li><a href="/signup"><i class="fa fa-user-plus"></i> Sign up</a></li>
-    <li><a href="signin"><i class="fa fa-sign-in"></i>Sign in</a></li>
+    <li><a href="/register"><i class="fa fa-user-plus"></i>Register</a></li>
+    <li><a href="login"><i class="fa fa-sign-in"></i>Login</li>
 </ul>
 </div>
 </div>
