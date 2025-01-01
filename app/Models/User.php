@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class Admin extends Authenticatable
+class User extends Authenticatable
 {
     use HasFactory,Notifiable;
     
 
-    protected $table = 'admins';
+    protected $table = 'users';
     public $timestamps = false;
     protected $fillable = ['fullname', 'email', 'password'];
 

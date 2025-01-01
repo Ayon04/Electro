@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -59,14 +60,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // })->name('admin-dashboard');
 // Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout']);
+Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'logout'])->middleware('auth');
 
 
 Route::get('/admin-profile', [App\Http\Controllers\Admin\AdminProfileController::class, 'ViewProfile'])->middleware('auth');
 
+// Route::put('/admin-update-profile', [App\Http\Controllers\Admin\AdminProfileController::class, 'update'])->name('admin-update-profile')->middleware('auth');
+// web.php
+Route::post('/admin-update-profiles', [AdminProfileController::class, 'update'])->name('admin-update-profile')->middleware('auth');
+
+
+Route::get('/edit-password', [ChangePasswordController::class,'editPassword'])->name('edit-password')->middleware('auth');
 
 // Route::get('/admin-profile', function () {
 //     return view('backend.dashboard.profile');
 // });
-
 

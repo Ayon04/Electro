@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+// use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -90,7 +90,7 @@ class RegisterController extends Controller
             return redirect()->back()->with('added', "Admin Signup Succeed");
         } catch (\Throwable $e) {
 
-            return redirect()->back()->with('message_fail', "An unexpected error occur");
+            return redirect()->back()->with('failed', "An unexpected error occur");
         }
     }
 

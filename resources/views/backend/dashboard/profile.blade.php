@@ -22,46 +22,73 @@
           <a  class="h1">Your Profile</a>
         </div>
         <div class="card-body">
-          <form action="" method="POST" enctype="multipart/form-data">
-            {{csrf_field()}}
-            @method('PUT')
+          @if(session()->has('update_success'))
+            <div class="alert alert-success">
+                {{ session()->get('update_success') }}
+            </div>
+          @endif
+          
+          @if(session()->has('update_fail'))
+            <div class="alert alert-danger">
+                {{ session()->get('update_fail') }}
+            </div>
+          @endif
+          
+          <form action="{{ route('admin-update-profile') }}" method="POST" enctype="multipart/form-data">
+            {{-- {{ csrf_field() }}  --}}
+            @csrf
+            
             <div class="text-center">
               <div class="rounded-circle overflow-hidden border border-primary d-flex align-items-center justify-content-center"
                    style="width: 150px; height: 150px; margin: auto;">
-                <i class="bi bi-image text-primary" style="font-size: 3rem;" id="placeholderIcon"></i>
-                <img src="" alt="image" class="img-fluid d-none" id="profileImage">
+                @if($admin->profile_image)
+                  <img src="{{ asset('storage/' . $admin->profile_image) }}" alt="image" class="img-fluid" id="profileImage">
+                @else
+                  <i class="bi bi-image text-primary" style="font-size: 3rem;" id="placeholderIcon"></i>
+                @endif
               </div>
               <div class="text-center mt-3">
                 <div class="input-group">
-                  <input type="file" id="fileInput" class="form-control" aria-label="Upload">
+                  <input type="file" id="fileInput" class="form-control" name="image" aria-label="Upload">
                 </div>
               </div>
             </div>
+            
             <div class="mt-3"></div>
             <div class="input-group mb-3"> 
-              <input type="text" class="form-control" placeholder="Full name" value="">
+              <input type="text" class="form-control" name="fullname" placeholder="Full name" value="{{ $admin->fullname }}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
                 </div>
+
+                @error('fullname')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
             </div>
+
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" value="">
+              <input type="email" class="form-control" name="email" placeholder="Email" value="{{  $admin->email }}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
                 </div>
+                @error('email')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
             </div>
-          </form>
-          <div class="social-auth-links text-center mt-3">
-            <a href="#" class="btn btn-block btn-primary">Update</a>
+            
+            <button type="submit" class="btn btn-block btn-primary">Update</button>
             <a href="#" class="btn btn-block btn-danger">Back</a>
-          </div>
+          </form>
         </div>
       </div>
     </div>
 
-    @include('backend.dashboard.changePassword')
 @endsection

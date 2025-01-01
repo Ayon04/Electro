@@ -14,9 +14,9 @@
                     </div>
                      @endif
                     
-                     @if(session()->has('added'))
+                     @if(session()->has('failed'))
                      <div class="alert alert-danger">
-                         {{ session()->get('message_fail') }}
+                         {{ session()->get('failed') }}
                      </div>
                       @endif
                      
