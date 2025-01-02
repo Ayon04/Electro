@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use App\Services\AdminService;
 
 Route::get('/login', function () {
@@ -75,4 +76,3 @@ Route::get('/edit-password', [ChangePasswordController::class,'editPassword'])->
 // Route::get('/admin-profile', function () {
 //     return view('backend.dashboard.profile');
 // });
-

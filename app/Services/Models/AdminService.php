@@ -12,16 +12,14 @@ class AdminService{
 
 public function create(array $payloads)
 {
-    return Admin::query()->create($payloads);
+    return User::query()->create($payloads);
 }
-
-
 
 public function update($id, array $payloads)
 {   
     $id = Auth::user()->id;
 
-     $admin = User::findOrFail($id);
+    $admin = User::findOrFail($id);
     $admin->update($payloads);
     return $admin;
 }
@@ -53,6 +51,6 @@ public function updatePassword($id, $password)
 //      $students = Admin::all();
 // }
 
-}
+// }
 
 ?>

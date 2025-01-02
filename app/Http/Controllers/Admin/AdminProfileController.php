@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminProfileUpdateRequest;
-use App\Models\Admin;
+use App\Models\User;
 use App\Services\Models\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminProfileController extends Controller
 {
-    public function ViewProfile(Admin $admin)//$id
+    public function ViewProfile(User $admin)//$id
     {
         
         try{
@@ -40,13 +40,9 @@ class AdminProfileController extends Controller
           
         }
         catch(\Throwable $e){
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return redirect()->back()->with('update_fail',"Failed to  Updated ");
         }
 
     }
 }
-
-
-
-

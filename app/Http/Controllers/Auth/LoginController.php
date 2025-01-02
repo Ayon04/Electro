@@ -5,7 +5,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Admin\AdminSigninRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 
 class LoginController extends Controller
 {

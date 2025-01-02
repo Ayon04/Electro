@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Models\User;
 class AdminSigninRequest extends FormRequest
 {
     public function authorize(): bool

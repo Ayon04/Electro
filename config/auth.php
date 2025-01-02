@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'admin',  // Change 'web' to 'admin' guard
-        'passwords' => 'admins',  // Use 'admins' for password reset configuration
+        'guard' => 'users',  // Change 'web' to 'users' guard
+        'passwords' => 'users',  // Use 'userss' for password reset configuration
     ],
 
     /*
@@ -36,10 +36,10 @@ return [
     */
 
     'guards' => [
-        // Admin guard
-        'admin' => [
+        // users guard
+        'users' => [
             'driver' => 'session',
-            'provider' => 'admins',  // Specify 'admins' provider here
+            'provider' => 'users',  // Specify 'userss' provider here
         ],
 
         // You can keep the default 'web' guard for other user authentication
@@ -67,10 +67,10 @@ return [
     */
 
     'providers' => [
-        // Admin provider
-        'admins' => [
+        // users provider
+        'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,  // Make sure this points to your Admin model
+            'model' => App\Models\User::class,  // Make sure this points to your users model
         ],
 
         // Default user provider (optional)
@@ -100,8 +100,8 @@ return [
     */
 
     'passwords' => [
-        'admins' => [  // Use 'admins' for the admin password reset
-            'provider' => 'admins',  // Reference the 'admins' provider
+        'users' => [  // Use 'userss' for the users password reset
+            'provider' => 'users',  // Reference the 'userss' provider
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

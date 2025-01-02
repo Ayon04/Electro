@@ -24,7 +24,7 @@ class AdminProfileUpdateRequest extends FormRequest
         return [
 
             'fullname'              => 'required|string|min:3|regex:/^[\pL\s]+$/u|max:30',
-            'email'                 => 'required|email|unique:admins,email',
+            'email'                 => 'required|email|unique:users,email',
             'image'                 => 'mimes:jpg,png | max:2048',
            
             
