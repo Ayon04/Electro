@@ -73,6 +73,9 @@ Route::post('/admin-update-profiles', [AdminProfileController::class, 'update'])
 
 Route::get('/edit-password', [ChangePasswordController::class,'editPassword'])->name('edit-password')->middleware('auth');
 
+Route::post('/update-password', [ChangePasswordController::class,'updatePassword'])->name('change-password')->middleware('auth');
+
 // Route::get('/admin-profile', function () {
 //     return view('backend.dashboard.profile');
-// });
+// });change-password
+

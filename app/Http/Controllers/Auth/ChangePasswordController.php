@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordController extends Controller
 {  
-
-
     public function editPassword(){
 
         try{
@@ -29,33 +27,63 @@ class ChangePasswordController extends Controller
         }
     }
 
-    public function ChangePassword( 
+    // public function ChangePassword( 
         
-        ChangePasswordRequest $req,
-        AdminService $ser
-    ){
+    //     ChangePasswordRequest $req,
+    //     AdminService $ser
+    // ){
 
-        try{
+    //     try{
 
-            // $admin = Auth:: auth()->user();
-            // return view('backend.dashboard.changePassword');
+    //         // $admin = Auth:: auth()->user();
+    //         // return view('backend.dashboard.changePassword');
 
-           $isMatched = Hash::check($req->current_password, auth()->user()->password);
+    //        $isMatched = Hash::check($req->current_password, auth()->user()->password);
 
-           if($isMatched){
+    //        if($isMatched){
 
-             $id = Auth::user()->id;
+    //          $id = Auth::user()->id;
 
-            // $id =Admin::Find(Auth::user()->id);
+    //         // $id =Admin::Find(Auth::user()->id);
 
-            $admin = $ser->updatePassword($id,$req->validated()); 
+    //         $admin = $ser->updatePassword($id,$req->validated()); 
             
-           }
-        }
-        catch(\Throwable $e){
+    //        }
+    //     }
+    //     catch(\Throwable $e){
             
-            return redirect()->back()->with('',"Error");
+    //         return redirect()->back()->with('',"Error");
+    //     }
+    // }
+
+    // Controller Method
+public function updatePassword(ChangePasswordRequest $req, AdminService $ser)
+{
+    //  dd($req->all());
+
+    try {
+        $isMatched = Hash::check($req->current_password, auth()->user()->password);
+
+         
+        if ($isMatched) {
+           
+
+            // dd($isMatched); 
+
+            $id = Auth::user()->id;
+            $admin = $ser->updatePassword($id, $req->validated()); 
+            
+
+            return redirect()->back()->with('success', 'Password updated successfully.');
+        } else {
+            return redirect()->back()->with('current_password_mismatch','Current password is incorrect.');
         }
+    } catch (\Throwable $e) { 
+        // dd($e->getMessage());
+
+        return redirect()->back()->with('error', 'An error occurred while changing the password.');
     }
+}
+
 
 }

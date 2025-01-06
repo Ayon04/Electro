@@ -23,11 +23,12 @@ class ChangePasswordRequest extends FormRequest
 
     public function rules(): array
     {
+
+        // dd($this->request->all());
         return [
 
             'current_password'              => 'required',
-            'confirm_password'              => 'required',
-            'new_password'                  =>'required|confirmed|alpha_num|min:6|max:30',
+            'password'                      =>'required|confirmed|min:6',
 
         ];
     }
