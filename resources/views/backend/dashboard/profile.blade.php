@@ -34,25 +34,24 @@
             </div>
           @endif
           
-                <form action="" method="POST" enctype="multipart/form-data" >
-                  <div class="rounded-circle overflow-hidden border border-primary d-flex align-items-center justify-content-center"
-                  style="width: 150px; height: 150px; margin: auto;">
-              @if($admin->profile_image)
-                <img src="{{ asset('storage/' . $admin->profile_image) }}" alt="image" class="img-fluid" id="profileImage">
-              @else
-                <i class="bi bi-image text-primary" style="font-size: 3rem;" id="placeholderIcon"></i>
-              @endif
+          <form action="{{ route('upload-profileImg') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="rounded-circle overflow-hidden border border-primary d-flex align-items-center justify-content-center"
+                 style="width: 150px; height: 150px; margin: auto;">
+                @if($admin->image)
+                <img src="{{ asset('storage/' . $admin->image) }}" alt="image" class="img-fluid" id="profileImage">
+                @else
+                    <i class="bi bi-image text-primary" style="font-size: 3rem;" id="placeholderIcon"></i>
+                @endif
             </div>
             <div class="text-center mt-3">
-              <div class="input-group">
-                <input type="file" id="fileInput" class="form-control" name="image" aria-label="Upload">
-              </div>
+                <div class="input-group">
+                    <input type="file" id="fileInput" class="form-control" name="image" aria-label="Upload">
+                </div>
             </div>
-          </div>
-
-          <button type="submit" class="btn btn-block btn-warning">Save Picture</button>
-
-          </form>
+            <button type="submit" class="btn btn-block btn-warning">Save Picture</button>
+        </form>
+        
 
          
 

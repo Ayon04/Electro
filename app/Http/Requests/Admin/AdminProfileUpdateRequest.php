@@ -20,14 +20,13 @@ class AdminProfileUpdateRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    {  
+        //  dd($this->request->all());
         return [
 
-            'fullname'              => 'required|string|min:3|regex:/^[\pL\s]+$/u|max:30',
+
+             'fullname'              => 'required|alpha|string|regex:/^[\pL\s]+$/u|max:50',
             'email'                 => 'required|email|unique:users,email',
-            'image'                 => 'mimes:jpg,png | max:2048',
-           
-            
         ];
     }
     
@@ -39,8 +38,7 @@ class AdminProfileUpdateRequest extends FormRequest
             'email.required'         => 'Email is required!',
             'email.email'            => 'Email format is incorrect',
             'email.unique'           => 'Email already exists',
-            'image.mimes'            => 'Image format must be jpg or png',
-            'image.max'              => 'Image size can not be more then 2 MB',
+            
         ];
     }
 

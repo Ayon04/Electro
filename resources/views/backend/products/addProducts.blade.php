@@ -12,65 +12,106 @@
 @endsection
 
 @section("content")
-<form>
-    <div class="mb-3">
-     
-      <input placeholder="Title" type="text" class="form-control" id="title">
-    </div>
-    
-    <div class="mb-3">
-       
-        <input placeholder="SKU" type="text" class="form-control" id="title">
-      </div>
-      <div class="mb-3">
-       
-        <input placeholder="Slug" type="text" class="form-control" id="title">
-      </div>
 
-      <div class="mb-6">        
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option selected>select a type</option>
-            <option value="1">Laptop</option>
-            <option value="2">Desktop</option>
-            
-          </select>
-      </div>
-
-      <div class="mb-3">
-        <input placeholder="Description" type="text-area" class="form-control" id="title">
-      </div>
-
-      <div class="mb-3" aria-placeholder="Image">
-        <input placeholder="Image" type="file" class="form-control" id="image">
-      </div>
+<a href="/productsList" class="link-info">View Products List</a>
 
 
 
-      <div class="mb-3">
-        <input placeholder="Brand" type="text" class="form-control" id="brand">
-      </div>
+<form action="{{ route('products-store') }}" method="POST" enctype="multipart/form-data">
+
+   @csrf
+  <!-- Title Input -->
+  <div class="mb-3">
+      <input placeholder="Title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
+      @error('title')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
+
+  <!-- SKU Input -->
+  <div class="mb-3">
+      <input placeholder="SKU" type="text" class="form-control @error('sku') is-invalid @enderror" id="sku" name="sku" value="{{ old('sku') }}">
+      @error('sku')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
 
+  <!-- Product Type Dropdown -->
+  <div class="mb-3">
+      <select class="form-select @error('type') is-invalid @enderror" id="product_type" name="type">
+          <option selected>Choose a product type</option>
+          <option value="Laptop" {{ old('type') == 'Laptop' ? 'selected' : '' }}>Laptop</option>
+          <option value="Smartphone" {{ old('type') == 'Smartphone' ? 'selected' : '' }}>Smartphone</option>
+      </select>
+      @error('type')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
-      
-      <div class="mb-3">
-        <input placeholder="Price($)" type="text" class="form-control" id="price">
-      </div>
+  <!-- Description Input -->
+  <div class="mb-3">
+      <textarea placeholder="Description" class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description') }}</textarea>
+      @error('description')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
+  <!-- Image Input -->
+  <div class="mb-3">
+      <input placeholder="Image" type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+      @error('image')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
-      
-      <div class="mb-3">
-        <input placeholder="Unit in Stock" type="text" class="form-control" id="stock_count">
-      </div>
+  <div class="mb-3">
+    <select class="form-select @error('brand') is-invalid @enderror" id="product_type" name="brand">
+        <option selected>Choose a product Brand</option>
+        <option value="Xiaomi" {{ old('brand') == 'Xiaomi' ? 'selected' : '' }}>Xiaomi</option>
+        <option value="Samsung" {{ old('brand') == 'Samsung' ? 'selected' : '' }}>Samsung</option>
+        <option value="Asus" {{ old('brand') == 'Asus' ? 'selected' : '' }}>Asus</option>
+        <option value="HP" {{ old('brand') == 'HP' ? 'selected' : '' }}>HP</option>
+    </select>
+    @error('type')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
+  <!-- Price Input -->
+  <div class="mb-3">
+      <input placeholder="Price (৳)" type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
+      @error('price')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
-      <div class="mb-3">
-        <label for="stock_status" class="form-label">Status</label>
-        <input type="" class="form-control" id="stock_status">
-      </div>
+  <!-- Stock Count Input -->
+  <div class="mb-3">
+      <input placeholder="Units in Stock" type="text" class="form-control @error('stock_count') is-invalid @enderror" id="stock_count" name="stock_count" value="{{ old('stock_count') }}">
+      @error('stock_count')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <!-- Stock Status Dropdown -->
+  <div class="mb-3">
+      <select name="stock_status" class="form-select @error('stock_status') is-invalid @enderror" aria-label=".form-select-lg example" id="stock_status">
+          <option selected>Choose an option</option>
+          <option value="in_stock" {{ old('stock_status') == 'in_stock' ? 'selected' : '' }}>In Stock</option>
+          <option value="out_of_stock" {{ old('stock_status') == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
+          <option value="pre_order" {{ old('stock_status') == 'pre_order' ? 'selected' : '' }}>Pre Order</option>
+      </select>
+      @error('stock_status')
+          <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+  </div>
+
+  <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add to Product List</button>
+
+</form>
+
 
 
 @endsection

@@ -3,10 +3,14 @@
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\ProductController;
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Models\Product;
+
 use App\Services\AdminService;
 
 Route::get('/login', function () {
@@ -41,9 +45,9 @@ Route::get('/manage-products', function () {
 });
 
 
-Route::get('/add-products', function () {
-    return view('backend.products.addProducts');
-});
+// Route::get('/add-products', function () {
+//     return view('backend.products.addProducts');
+// });
 
 
 Route::post('/registers', action: [RegisterController::class, 'create'])->name('registers');
@@ -74,6 +78,19 @@ Route::post('/admin-update-profiles', [AdminProfileController::class, 'update'])
 Route::get('/edit-password', [ChangePasswordController::class,'editPassword'])->name('edit-password')->middleware('auth');
 
 Route::post('/update-password', [ChangePasswordController::class,'updatePassword'])->name('change-password')->middleware('auth');
+
+Route::post('/update-image', [AdminProfileController::class, 'ProfilePictureUpload'])->name('upload-profileImg')->middleware('auth');
+
+
+Route::get('/productsOperations', [App\Http\Controllers\Product\ProductController::class, 'productPage'])->name('products-manage');
+Route::post('/products/store', [App\Http\Controllers\Product\ProductController::class, 'store'])->name('products-store');
+
+Route::get('/productsList', [App\Http\Controllers\Product\ProductController::class, 'viewProducts'])->name('products-list');
+
+Route::post('/delete/{id}', [App\Http\Controllers\Product\ProductController::class, 'destroy'])->name('delete');
+
+// Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
+
 
 // Route::get('/admin-profile', function () {
 //     return view('backend.dashboard.profile');

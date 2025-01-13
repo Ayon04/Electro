@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminProfileUpdateRequest;
+use App\Http\Requests\ProfilePictureUploadRequest;
 use App\Models\User;
 use App\Services\Models\AdminService;
 use Illuminate\Http\Request;
@@ -36,13 +37,35 @@ class AdminProfileController extends Controller
 
             $admin = $adminService->update($id,$updateRequest->validated());
 
-            return redirect()->back()->with('updated',"Profile Updated");
+            return redirect()->back();
           
         }
         catch(\Throwable $e){
             // dd($e->getMessage());
-            return redirect()->back()->with('update_fail',"Failed to  Updated ");
+            return redirect()->back();
         }
 
     }
+    public function ProfilePictureUpload(ProfilePictureUploadRequest $reqImg, AdminService $adminService)
+    {
+        try {
+            $userImg = $reqImg->validated();
+            $id = Auth::user()->id;
+                if ($reqImg->hasFile('image')) {
+                $file = $reqImg->file('image');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('uploads', $filename, 'public');
+                $userImg['image'] = $path;
+            }
+            $admin = $adminService->update($id, $userImg);
+            return redirect()->back()->with('success', "Image Uploaded");
+    
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('failed', "Failed to upload image");
+        }
+    }
+    
+    
+    
+
 }
