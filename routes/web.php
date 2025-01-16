@@ -96,3 +96,7 @@ Route::post('/delete/{id}', [App\Http\Controllers\Product\ProductController::cla
 //     return view('backend.dashboard.profile');
 // });change-password
 
+//updateProduct
+
+Route::get('/edit-product/{id}', [App\Http\Controllers\Product\ProductController::class, 'editProduct'])->name('edit-product');
+Route::post('/update-product/{id}', [App\Http\Controllers\Product\ProductController::class, 'updateProduct'])->name('update-product');

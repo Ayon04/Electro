@@ -15,6 +15,19 @@ class ProductService
 
         return Product::query()->create($payloads);
     }
+
+    public function update($id, array $payloads)///product update 
+        {   
+            $product = Product::findOrFail($id);
+
+            // if (!empty($payloads['slug'])) {
+                
+            // }
+            $payloads['slug'] = Str::slug($payloads['title']);
+            $product->update($payloads);
+            return $product;
+        }
+
 }
 
 // public function updateProduct($id, array $payloads)
@@ -25,3 +38,4 @@ class ProductService
 //     return $admin;
 
 // }
+

@@ -45,16 +45,32 @@
                     <td>
                         <img src="{{ asset('storage/' . $products->image) }}" height="70" width="70" />
                     </td>
-                    <td><button class="btn btn-dark"> <a href="{{ url('student-edit/' . $products->id) }}">Update</a></button></td>
                     <td>
-                        <form action="{{ route('delete', $products->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ url('edit-product/' . $products->id) }}" class="btn btn-warning">Edit</a>
+                    
+                    </td>
+                    <td>
+                        <form action="{{ route('delete', $products->id) }}" method="POST" style="display:inline;" id="delete-form-{{ $products->id }}">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" onclick="confirmDelete({{ $products->id }}, event)" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
-                    
+                                        
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <script>
+      function confirmDelete(productId, event) {
+    event.preventDefault();
+    
+    if (confirm("Are you sure you want to delete this item?")) {
+        document.getElementById('delete-form-' + productId).submit();
+    } else {
+        return false;
+    }
+}
+
+    </script>
 @endsection
